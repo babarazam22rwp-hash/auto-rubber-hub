@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Checkout | AUTO Rubber Hub</title>
+
+    <link
+        rel="stylesheet"
+        href="{{ url_for('static', filename='css/style.css') }}"
+    >
+
+    <link
+        rel="stylesheet"
+        href="{{ url_for('static', filename='css/backend.css') }}"
+    >
+</head>
+
+<body class="form-page">
+
+    <main class="form-container">
+
+        <a href="{{ url_for('home') }}" class="back-link">
+            ← Return to store
+        </a>
+
+        <section class="checkout-layout">
+
+            <form
+                id="checkout-form"
+                class="backend-card customer-form"
+            >
+                <span class="form-kicker">Guest checkout</span>
+
+                <h1>Complete your order</h1>
+
+                <p class="form-description">
+                    You do not need to create an account.
+                </p>
+
+                <div class="field-grid">
+                    <div class="form-field full-field">
+                        <label for="customer-name">
+                            Full name
+                        </label>
+
+                        <input
+                            id="customer-name"
+                            name="customerName"
+                            type="text"
+                            maxlength="150"
+                            required
+                        >
+                    </div>
+
+                    <div class="form-field">
+                        <label for="customer-email">
+                            Email address
+                        </label>
+
+                        <input
+                            id="customer-email"
+                            name="customerEmail"
+                            type="email"
+                            maxlength="255"
+                            required
+                        >
+                    </div>
+
+                    <div class="form-field">
+                        <label for="customer-phone">
+                            Phone number
+                        </label>
+
+                        <input
+                            id="customer-phone"
+                            name="customerPhone"
+                            type="tel"
+                            maxlength="40"
+                            placeholder="+92 300 1234567"
+                            required
+                        >
+                    </div>
+
+                    <div class="form-field full-field">
+                        <label for="customer-address">
+                            Delivery address
+                        </label>
+
+                        <input
+                            id="customer-address"
+                            name="address"
+                            type="text"
+                            maxlength="300"
+                            required
+                        >
+                    </div>
+
+                    <div class="form-field full-field">
+                        <label for="customer-city">
+                            City
+                        </label>
+
+                        <input
+                            id="customer-city"
+                            name="city"
+                            type="text"
+                            maxlength="100"
+                            required
+                        >
+                    </div>
+
+                    <div class="form-field full-field">
+                        <label for="order-notes">
+                            Order notes (optional)
+                        </label>
+
+                        <textarea
+                            id="order-notes"
+                            name="notes"
+                            maxlength="1000"
+                            rows="4"
+                            placeholder="Delivery instructions or vehicle information"
+                        ></textarea>
+                    </div>
+                </div>
+
+                <p
+                    id="checkout-message"
+                    class="form-message"
+                    role="alert"
+                ></p>
+
+                <button
+                    id="place-order-button"
+                    type="submit"
+                    class="primary-button form-submit-button"
+                >
+                    Place Order
+                </button>
+            </form>
+
+            <aside class="backend-card order-summary">
+                <span class="form-kicker">Your cart</span>
+
+                <h2>Order summary</h2>
+
+                <div id="checkout-items"></div>
+
+                <div class="summary-total">
+                    <span>Total</span>
+                    <strong id="checkout-total">
+                        $0.00
+                    </strong>
+                </div>
+            </aside>
+
+        </section>
+    </main>
+
+    <script
+        src="{{ url_for('static', filename='js/checkout.js') }}"
+    ></script>
+</body>
+</html>

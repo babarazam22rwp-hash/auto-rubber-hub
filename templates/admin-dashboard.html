@@ -1,0 +1,919 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Admin Dashboard | AUTO Rubber Hub</title>
+
+    <link
+        rel="stylesheet"
+        href="{{ url_for('static', filename='css/style.css') }}"
+    >
+
+    <link
+        rel="stylesheet"
+        href="{{ url_for('static', filename='css/backend.css') }}"
+    >
+</head>
+
+<body class="admin-page">
+
+    <header class="admin-header">
+        <div>
+            <span class="form-kicker">
+                AUTO Rubber Hub
+            </span>
+
+            <h1>Order dashboard</h1>
+        </div>
+
+        <form
+            method="post"
+            action="{{ url_for('admin_logout') }}"
+        >
+            <button
+                type="submit"
+                class="secondary-button"
+            >
+                Log Out
+            </button>
+        </form>
+    </header>
+
+    <main class="admin-container">
+
+        {% with messages =
+            get_flashed_messages(with_categories=true)
+        %}
+            {% for category, message in messages %}
+                <p class="form-message {{ category }}">
+                    {{ message }}
+                </p>
+            {% endfor %}
+        {% endwith %}
+
+        <nav class="dashboard-links">
+            <a href="#normal-orders">
+                Store Orders
+            </a>
+
+            <a href="#special-orders">
+                Special Requests
+            </a>
+
+            <a href="#inventory">
+                Inventory
+            </a>
+        </nav>
+
+        <section
+            id="normal-orders"
+            class="dashboard-section"
+        >
+            <div class="dashboard-heading">
+                <div>
+                    <span class="form-kicker">
+                        Checkout orders
+                    </span>
+
+                    <h2>Customer orders</h2>
+                </div>
+
+                <strong>{{ orders|length }}</strong>
+            </div>
+
+            {% if orders %}
+                <div class="admin-card-grid">
+                    {% for order in orders %}
+                        <article class="backend-card admin-record">
+                            <div class="record-heading">
+                                <div>
+                                    <span>
+                                        {{ order.order_number }}
+                                    </span>
+
+                                    <h3>
+                                        {{ order.customer_name }}
+                                    </h3>
+                                </div>
+
+                                <span class="status-badge">
+                                    {{ order.status }}
+                                </span>
+                            </div>
+
+                            <div class="record-details">
+                                <p>
+                                    <strong>Email:</strong>
+                                    {{ order.customer_email }}
+                                </p>
+
+                                <p>
+                                    <strong>Phone:</strong>
+                                    {{ order.customer_phone }}
+                                </p>
+
+                                <p>
+                                    <strong>Address:</strong>
+                                    {{ order.address }},
+                                    {{ order.city }}
+                                </p>
+
+                                <p>
+                                    <strong>Created:</strong>
+                                    {{ order.created_at.strftime(
+                                        "%d %b %Y, %I:%M %p"
+                                    ) }}
+                                </p>
+                            </div>
+
+                            <div class="ordered-items">
+                                {% for item in order.items %}
+                                    <div>
+                                        <span>
+                                            {{ item.product_name }}
+                                            × {{ item.quantity }}
+                                        </span>
+
+                                        <strong>
+                                            ${{ "%.2f"|format(
+                                                item.line_total
+                                            ) }}
+                                        </strong>
+                                    </div>
+                                {% endfor %}
+                            </div>
+
+                            <div class="record-total">
+                                <span>Total</span>
+
+                                <strong>
+                                    ${{ "%.2f"|format(order.total) }}
+                                </strong>
+                            </div>
+
+                            {% if order.notes %}
+                                <div class="admin-note">
+                                    {{ order.notes }}
+                                </div>
+                            {% endif %}
+
+                            <form
+                                method="post"
+                                action="{{
+                                    url_for(
+                                        'update_order_status',
+                                        order_id=order.id
+                                    )
+                                }}"
+                                class="status-form"
+                            >
+                                <select name="status" required>
+                                    {% for status in order_statuses %}
+                                        <option
+                                            value="{{ status }}"
+                                            {% if status == order.status %}
+                                                selected
+                                            {% endif %}
+                                        >
+                                            {{ status|title }}
+                                        </option>
+                                    {% endfor %}
+                                </select>
+
+                                <button
+                                    type="submit"
+                                    class="primary-button"
+                                >
+                                    Update Status
+                                </button>
+                            </form>
+                        </article>
+                    {% endfor %}
+                </div>
+            {% else %}
+                <div class="backend-card empty-dashboard">
+                    No store orders have been received.
+                </div>
+            {% endif %}
+        </section>
+
+        <section
+            id="special-orders"
+            class="dashboard-section"
+        >
+            <div class="dashboard-heading">
+                <div>
+                    <span class="form-kicker">
+                        Unavailable items
+                    </span>
+
+                    <h2>Special-part requests</h2>
+                </div>
+
+                <strong>
+                    {{ special_requests|length }}
+                </strong>
+            </div>
+
+            {% if special_requests %}
+                <div class="admin-card-grid">
+                    {% for item in special_requests %}
+                        <article class="backend-card admin-record">
+                            <div class="record-heading">
+                                <div>
+                                    <span>
+                                        {{ item.request_number }}
+                                    </span>
+
+                                    <h3>
+                                        {{ item.product_name }}
+                                    </h3>
+                                </div>
+
+                                <span class="status-badge">
+                                    {{ item.status }}
+                                </span>
+                            </div>
+
+                            {% if item.image_filename %}
+                                <a
+                                    href="{{
+                                        url_for(
+                                            'view_uploaded_image',
+                                            filename=item.image_filename
+                                        )
+                                    }}"
+                                    target="_blank"
+                                    rel="noopener"
+                                >
+                                    <img
+                                        src="{{
+                                            url_for(
+                                                'view_uploaded_image',
+                                                filename=item.image_filename
+                                            )
+                                        }}"
+                                        alt="Requested car part"
+                                        class="request-image"
+                                    >
+                                </a>
+                            {% endif %}
+
+                            <div class="record-details">
+                                <p>
+                                    <strong>Customer:</strong>
+                                    {{ item.customer_name }}
+                                </p>
+
+                                <p>
+                                    <strong>Email:</strong>
+                                    {{ item.customer_email }}
+                                </p>
+
+                                <p>
+                                    <strong>Phone:</strong>
+                                    {{ item.customer_phone }}
+                                </p>
+
+                                <p>
+    <strong>Quantity:</strong>
+    {{ item.quantity }}
+</p>
+
+<p>
+    <strong>Shipping address:</strong>
+    {{ item.shipping_address }}
+</p>
+
+                                <p>
+                                    <strong>Vehicle:</strong>
+                                    {{ item.vehicle_make or "Not provided" }}
+                                    {{ item.vehicle_model or "" }}
+                                    {{ item.vehicle_year or "" }}
+                                </p>
+
+                                <p>
+                                    <strong>Details:</strong>
+                                    {{ item.details }}
+                                </p>
+                            </div>
+
+                            <form
+                                method="post"
+                                action="{{
+                                    url_for(
+                                        'update_special_order',
+                                        request_id=item.id
+                                    )
+                                }}"
+                                class="special-update-form"
+                            >
+                                <div class="form-field">
+                                    <label>Status</label>
+
+                                    <select name="status" required>
+                                        {% for status in request_statuses %}
+                                            <option
+                                                value="{{ status }}"
+                                                {% if status == item.status %}
+                                                    selected
+                                                {% endif %}
+                                            >
+                                                {{ status|title }}
+                                            </option>
+                                        {% endfor %}
+                                    </select>
+                                </div>
+
+                                <div class="form-field">
+                                    <label>Quoted price</label>
+
+                                    <input
+                                        name="quotedPrice"
+                                        type="number"
+                                        min="0"
+                                        step="0.01"
+                                        value="{{
+                                            item.quoted_price
+                                            if item.quoted_price
+                                            else ''
+                                        }}"
+                                    >
+                                </div>
+
+                                <div class="form-field full-field">
+                                    <label>Admin notes</label>
+
+                                    <textarea
+                                        name="adminNotes"
+                                        rows="3"
+                                        maxlength="2000"
+                                    >{{ item.admin_notes or "" }}</textarea>
+                                </div>
+
+                                <button
+                                    type="submit"
+                                    class="primary-button"
+                                >
+                                    Save Request
+                                </button>
+                            </form>
+                        </article>
+                    {% endfor %}
+                </div>
+            {% else %}
+                <div class="backend-card empty-dashboard">
+                    No special-part requests have been received.
+                </div>
+            {% endif %}
+        </section>
+
+        <section
+            id="inventory"
+            class="dashboard-section"
+        >
+            <div class="dashboard-heading">
+                <div>
+                    <span class="form-kicker">
+                        Stock
+                    </span>
+
+                    <h2>Product inventory</h2>
+                </div>
+            </div>
+
+<div class="inventory-table-wrapper">
+    <table class="inventory-table product-management-table">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Product</th>
+                <th>Category</th>
+                <th>Price</th>
+                <th>Stock</th>
+                <th>Status</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            {% for product in products %}
+                <tr
+                    class="{% if not product.active %}archived-product-row{% endif %}"
+                >
+                    <td>{{ product.id }}</td>
+
+                    <td>
+                        <strong>{{ product.name }}</strong>
+
+                        <small class="product-compatibility-text">
+                            {{ product.compatibility }}
+                        </small>
+                    </td>
+
+                    <td>{{ product.category }}</td>
+
+                    <td>
+                        ${{ "%.2f"|format(product.price) }}
+                    </td>
+
+                    <td>{{ product.stock }}</td>
+
+                    <td>
+                        {% if product.active %}
+                            <span class="product-status active-product-status">
+                                Active
+                            </span>
+                        {% else %}
+                            <span class="product-status archived-product-status">
+                                Archived
+                            </span>
+                        {% endif %}
+                    </td>
+
+                    <td>
+                        <div class="product-action-buttons">
+                            <button
+                                type="button"
+                                class="admin-action-button edit-action-button"
+                                data-edit-product="{{ product.id }}"
+                            >
+                                Edit
+                            </button>
+
+                            {% if product.active %}
+                                <form
+                                    method="post"
+                                    action="{{
+                                        url_for(
+                                            'archive_product',
+                                            product_id=product.id
+                                        )
+                                    }}"
+                                >
+                                    <button
+                                        type="submit"
+                                        class="admin-action-button archive-action-button"
+                                    >
+                                        Archive
+                                    </button>
+                                </form>
+                            {% else %}
+                                <form
+                                    method="post"
+                                    action="{{
+                                        url_for(
+                                            'restore_product',
+                                            product_id=product.id
+                                        )
+                                    }}"
+                                >
+                                    <button
+                                        type="submit"
+                                        class="admin-action-button restore-action-button"
+                                    >
+                                        Restore
+                                    </button>
+                                </form>
+                            {% endif %}
+
+                            <form
+                                method="post"
+                                action="{{
+                                    url_for(
+                                        'delete_product',
+                                        product_id=product.id
+                                    )
+                                }}"
+                                onsubmit="
+                                    return confirm(
+                                        'Permanently delete this product?'
+                                    );
+                                "
+                            >
+                                <button
+                                    type="submit"
+                                    class="admin-action-button delete-action-button"
+                                >
+                                    Delete
+                                </button>
+                            </form>
+                        </div>
+                    </td>
+                </tr>
+
+                <tr
+                    id="edit-product-{{ product.id }}"
+                    class="edit-product-row"
+                    hidden
+                >
+                    <td colspan="7">
+                        <form
+                            method="post"
+                            action="{{
+                                url_for(
+                                    'edit_product',
+                                    product_id=product.id
+                                )
+                            }}"
+                            class="edit-product-form"
+                        >
+                            <div class="form-field">
+                                <label>
+                                    Product name
+                                </label>
+
+                                <input
+                                    name="name"
+                                    type="text"
+                                    maxlength="180"
+                                    value="{{ product.name }}"
+                                    required
+                                >
+                            </div>
+
+                            <div class="form-field">
+                                <label>
+                                    Category
+                                </label>
+
+                                <select name="category" required>
+                                    <option
+                                        value="seals"
+                                        {% if product.category == "seals" %}
+                                            selected
+                                        {% endif %}
+                                    >
+                                        Seals
+                                    </option>
+
+                                    <option
+                                        value="bushes"
+                                        {% if product.category == "bushes" %}
+                                            selected
+                                        {% endif %}
+                                    >
+                                        Bushes
+                                    </option>
+
+                                    <option
+                                        value="mounts"
+                                        {% if product.category == "mounts" %}
+                                            selected
+                                        {% endif %}
+                                    >
+                                        Mounts
+                                    </option>
+
+                                    <option
+                                        value="belts"
+                                        {% if product.category == "belts" %}
+                                            selected
+                                        {% endif %}
+                                    >
+                                        Belts
+                                    </option>
+
+                                    <option
+                                        value="hoses"
+                                        {% if product.category == "hoses" %}
+                                            selected
+                                        {% endif %}
+                                    >
+                                        Hoses
+                                    </option>
+
+                                    <option
+                                        value="door-rubber"
+                                        {% if product.category == "door-rubber" %}
+                                            selected
+                                        {% endif %}
+                                    >
+                                        Door Rubber
+                                    </option>
+                                </select>
+                            </div>
+
+                            <div class="form-field full-field">
+                                <label>
+                                    Compatibility
+                                </label>
+
+                                <input
+                                    name="compatibility"
+                                    type="text"
+                                    maxlength="250"
+                                    value="{{ product.compatibility }}"
+                                    required
+                                >
+                            </div>
+
+                            <div class="form-field full-field">
+                                <label>
+                                    Description
+                                </label>
+
+                                <textarea
+                                    name="description"
+                                    rows="4"
+                                    maxlength="2000"
+                                    required
+                                >{{ product.description }}</textarea>
+                            </div>
+
+                            <div class="form-field">
+                                <label>
+                                    Price
+                                </label>
+
+                                <input
+                                    name="price"
+                                    type="number"
+                                    min="0"
+                                    step="0.01"
+                                    value="{{ product.price }}"
+                                    required
+                                >
+                            </div>
+
+                            <div class="form-field">
+                                <label>
+                                    Old price
+                                </label>
+
+                                <input
+                                    name="oldPrice"
+                                    type="number"
+                                    min="0"
+                                    step="0.01"
+                                    value="{{
+                                        product.old_price
+                                        if product.old_price is not none
+                                        else ''
+                                    }}"
+                                >
+                            </div>
+
+                            <div class="form-field">
+                                <label>
+                                    Stock
+                                </label>
+
+                                <input
+                                    name="stock"
+                                    type="number"
+                                    min="0"
+                                    step="1"
+                                    value="{{ product.stock }}"
+                                    required
+                                >
+                            </div>
+
+                            <div class="edit-product-form-actions">
+                                <button
+                                    type="submit"
+                                    class="primary-button"
+                                >
+                                    Save Changes
+                                </button>
+
+                                <button
+                                    type="button"
+                                    class="secondary-button cancel-edit-button"
+                                    data-cancel-edit="{{ product.id }}"
+                                >
+                                    Cancel
+                                </button>
+                            </div>
+                        </form>
+                    </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+
+
+
+
+
+            <section class="backend-card add-product-card">
+    <span class="form-kicker">New product</span>
+    <h3>Add product</h3>
+
+    <form
+        method="post"
+        action="{{ url_for('add_product') }}"
+        class="add-product-form"
+    >
+        <div class="form-field">
+            <label for="new-product-name">
+                Product name
+            </label>
+
+            <input
+                id="new-product-name"
+                name="name"
+                type="text"
+                maxlength="180"
+                required
+            >
+        </div>
+
+        <div class="form-field">
+            <label for="new-product-category">
+                Category
+            </label>
+
+            <select
+                id="new-product-category"
+                name="category"
+                required
+            >
+                <option value="">Select category</option>
+                <option value="seals">Seals</option>
+                <option value="bushes">Bushes</option>
+                <option value="mounts">Mounts</option>
+                <option value="door-rubber">
+                    Door Rubber
+                </option>
+                <option value="hoses">Hoses</option>
+                <option value="belts">Belts</option>
+            </select>
+        </div>
+
+        <div class="form-field full-field">
+            <label for="new-product-compatibility">
+                Compatibility
+            </label>
+
+            <input
+                id="new-product-compatibility"
+                name="compatibility"
+                type="text"
+                maxlength="250"
+                placeholder="Honda Civic 2014–2020"
+                required
+            >
+        </div>
+
+        <div class="form-field full-field">
+            <label for="new-product-description">
+                Description
+            </label>
+
+            <textarea
+                id="new-product-description"
+                name="description"
+                rows="4"
+                maxlength="2000"
+                required
+            ></textarea>
+        </div>
+
+        <div class="form-field">
+            <label for="new-product-price">
+                Price
+            </label>
+
+            <input
+                id="new-product-price"
+                name="price"
+                type="number"
+                min="0"
+                step="0.01"
+                required
+            >
+        </div>
+
+        <div class="form-field">
+            <label for="new-product-old-price">
+                Old price
+            </label>
+
+            <input
+                id="new-product-old-price"
+                name="oldPrice"
+                type="number"
+                min="0"
+                step="0.01"
+            >
+        </div>
+
+        <div class="form-field">
+            <label for="new-product-stock">
+                Stock
+            </label>
+
+            <input
+                id="new-product-stock"
+                name="stock"
+                type="number"
+                min="0"
+                step="1"
+                required
+            >
+        </div>
+
+        <div class="form-field product-submit-field">
+            <button
+                type="submit"
+                class="primary-button"
+            >
+                Add Product
+            </button>
+        </div>
+    </form>
+</section>
+
+            <div class="inventory-table-wrapper">
+                <table class="inventory-table">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Product</th>
+                            <th>Category</th>
+                            <th>Price</th>
+                            <th>Stock</th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+                        {% for product in products %}
+                            <tr>
+                                <td>{{ product.id }}</td>
+                                <td>{{ product.name }}</td>
+                                <td>{{ product.category }}</td>
+                                <td>
+                                    ${{ "%.2f"|format(product.price) }}
+                                </td>
+                                <td>{{ product.stock }}</td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+    </main>
+
+<script>
+    document
+        .querySelectorAll("[data-edit-product]")
+        .forEach((button) => {
+            button.addEventListener("click", () => {
+                const productId =
+                    button.dataset.editProduct;
+
+                const editRow =
+                    document.querySelector(
+                        `#edit-product-${productId}`
+                    );
+
+                if (!editRow) {
+                    return;
+                }
+
+                editRow.hidden = !editRow.hidden;
+
+                if (!editRow.hidden) {
+                    editRow.scrollIntoView({
+                        behavior: "smooth",
+                        block: "center",
+                    });
+                }
+            });
+        });
+
+    document
+        .querySelectorAll("[data-cancel-edit]")
+        .forEach((button) => {
+            button.addEventListener("click", () => {
+                const productId =
+                    button.dataset.cancelEdit;
+
+                const editRow =
+                    document.querySelector(
+                        `#edit-product-${productId}`
+                    );
+
+                if (editRow) {
+                    editRow.hidden = true;
+                }
+            });
+        });
+</script>
+
+
+
+
+
+</body>
+</html>

@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Admin Login | AUTO Rubber Hub</title>
+
+    <link
+        rel="stylesheet"
+        href="{{ url_for('static', filename='css/style.css') }}"
+    >
+
+    <link
+        rel="stylesheet"
+        href="{{ url_for('static', filename='css/backend.css') }}"
+    >
+</head>
+
+<body class="form-page">
+
+    <main class="login-wrapper">
+
+        <form
+            method="post"
+            class="backend-card admin-login-card"
+        >
+            <span class="form-kicker">
+                Protected area
+            </span>
+
+            <h1>Admin login</h1>
+
+            {% with messages =
+                get_flashed_messages(with_categories=true)
+            %}
+                {% for category, message in messages %}
+                    <p class="form-message {{ category }}">
+                        {{ message }}
+                    </p>
+                {% endfor %}
+            {% endwith %}
+
+            <div class="form-field">
+                <label for="username">
+                    Username
+                </label>
+
+                <input
+                    id="username"
+                    name="username"
+                    type="text"
+                    required
+                    autofocus
+                >
+            </div>
+
+            <div class="form-field">
+                <label for="password">
+                    Password
+                </label>
+
+                <input
+                    id="password"
+                    name="password"
+                    type="password"
+                    required
+                >
+            </div>
+
+            <button
+                type="submit"
+                class="primary-button form-submit-button"
+            >
+                Log In
+            </button>
+        </form>
+
+    </main>
+</body>
+</html>

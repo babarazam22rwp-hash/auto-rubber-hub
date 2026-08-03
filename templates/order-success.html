@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Request Received | AUTO Rubber Hub</title>
+
+    <link
+        rel="stylesheet"
+        href="{{ url_for('static', filename='css/style.css') }}"
+    >
+
+    <link
+        rel="stylesheet"
+        href="{{ url_for('static', filename='css/backend.css') }}"
+    >
+</head>
+
+<body class="form-page">
+
+    <main class="success-wrapper">
+
+        <section class="backend-card success-card">
+            <div class="success-icon">✓</div>
+
+            <span class="form-kicker">
+                Request received
+            </span>
+
+            <h1>Thank you!</h1>
+
+            <p>
+                Your order or special-part request has been saved.
+            </p>
+
+            <div class="reference-box">
+                <span>Reference number</span>
+                <strong>{{ reference }}</strong>
+            </div>
+
+            <p class="form-description">
+                Keep this reference number. We will contact you
+                using the email address or phone number you provided.
+            </p>
+
+            <a
+                href="{{ url_for('home') }}"
+                class="primary-button"
+            >
+                Return to Store
+            </a>
+        </section>
+
+    </main>
+</body>
+</html>
