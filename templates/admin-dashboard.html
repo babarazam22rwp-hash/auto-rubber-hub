@@ -141,9 +141,7 @@
                                         </span>
 
                                         <strong>
-                                            ${{ "%.2f"|format(
-                                                item.line_total
-                                            ) }}
+                                           PKR {{ "%.2f"|format(item.line_total) }}
                                         </strong>
                                     </div>
                                 {% endfor %}
@@ -153,7 +151,7 @@
                                 <span>Total</span>
 
                                 <strong>
-                                    ${{ "%.2f"|format(order.total) }}
+                                    PKR {{ "%.2f"|format(order.total) }}
                                 </strong>
                             </div>
 
@@ -420,7 +418,7 @@
                     <td>{{ product.category }}</td>
 
                     <td>
-                        ${{ "%.2f"|format(product.price) }}
+                        PKR {{ "%.2f"|format(product.price) }}
                     </td>
 
                     <td>{{ product.stock }}</td>
@@ -852,7 +850,7 @@
                                 <td>{{ product.name }}</td>
                                 <td>{{ product.category }}</td>
                                 <td>
-                                    ${{ "%.2f"|format(product.price) }}
+                                    PKR {{ "%.2f"|format(product.price) }}
                                 </td>
                                 <td>{{ product.stock }}</td>
                             </tr>
