@@ -209,14 +209,14 @@ document.addEventListener("DOMContentLoaded", () => {
                     <div class="product-bottom">
                         <div class="product-price">
                             <strong>
-                                $${price.toFixed(2)}
+                               ${formatCurrency(price)}
                             </strong>
 
                             ${
                                 oldPrice !== null
                                     ? `
                                         <del>
-                                            $${oldPrice.toFixed(2)}
+                                            ${oldPrice.toFixed(2)}
                                         </del>
                                     `
                                     : ""
@@ -523,7 +523,7 @@ document.addEventListener("DOMContentLoaded", () => {
                         <span>Subtotal</span>
 
                         <strong id="store-cart-subtotal">
-                            $0.00
+                            PKR 0.00
                         </strong>
                     </div>
 
@@ -687,7 +687,7 @@ document.addEventListener("DOMContentLoaded", () => {
             `;
 
             subtotalElement.textContent =
-                "$0.00";
+                "PKR 0.00";
 
             return;
         }
@@ -724,10 +724,8 @@ document.addEventListener("DOMContentLoaded", () => {
                             </h3>
 
                             <p>
-                                $${Number(
-                                    product.price
-                                ).toFixed(2)} each
-                            </p>
+    ${formatCurrency(Number(product.price))} each
+</p>
 
                             <div class="store-cart-item-bottom">
                                 <div class="store-quantity-control">
@@ -753,7 +751,7 @@ document.addEventListener("DOMContentLoaded", () => {
                                 </div>
 
                                 <strong>
-                                    $${lineTotal.toFixed(2)}
+                                    ${formatCurrency(lineTotal)}
                                 </strong>
                             </div>
                         </div>
@@ -774,8 +772,7 @@ document.addEventListener("DOMContentLoaded", () => {
             })
             .join("");
 
-        subtotalElement.textContent =
-            `$${getCartSubtotal().toFixed(2)}`;
+       subtotalElement.textContent = formatCurrency(getCartSubtotal());
 
         bindCartItemButtons();
     }
