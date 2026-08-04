@@ -1460,13 +1460,23 @@ document.addEventListener("DOMContentLoaded", () => {
     | Helpers
     |--------------------------------------------------------------------------
     */
-
+/*
     function formatCurrency(value) {
         return new Intl.NumberFormat("en-US", {
             style: "currency",
             currency: "USD"
         }).format(value);
-    }
+    }*/
+
+        function formatCurrency(value) {
+    return new Intl.NumberFormat("en-PK", {
+        style: "currency",
+        currency: "PKR",
+        currencyDisplay: "code",
+        minimumFractionDigits: 2,
+        maximumFractionDigits: 2
+    }).format(value);
+}
 
     function escapeHtml(value) {
         const div = document.createElement("div");
