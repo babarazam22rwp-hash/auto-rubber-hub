@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Request a Part | AUTO Rubber Hub</title>
+
+    <link
+        rel="stylesheet"
+        href="{{ url_for('static', filename='css/style.css') }}"
+    >
+
+    <link
+        rel="stylesheet"
+        href="{{ url_for('static', filename='css/backend.css') }}"
+    >
+</head>
+
+<body class="form-page">
+
+    <main class="form-container narrow-container">
+
+        <a href="{{ url_for('home') }}" class="back-link">
+            ← Return to store
+        </a>
+
+        <form
+            id="special-order-form"
+            class="backend-card customer-form"
+            enctype="multipart/form-data"
+        >
+            <span class="form-kicker">
+                Cannot find your part?
+            </span>
+
+            <h1>Request a special car part</h1>
+
+            <p class="form-description">
+                Tell us which part you need. We will save your
+                request and contact you when it is available.
+            </p>
+
+            <div class="field-grid">
+
+                <div class="form-field full-field">
+                    <label for="request-name">
+                        Full name
+                    </label>
+
+                    <input
+                        id="request-name"
+                        name="customerName"
+                        type="text"
+                        maxlength="150"
+                        required
+                    >
+                </div>
+
+                <div class="form-field">
+                    <label for="request-email">
+                        Email address
+                    </label>
+
+                    <input
+                        id="request-email"
+                        name="customerEmail"
+                        type="email"
+                        maxlength="255"
+                        required
+                    >
+                </div>
+
+                <div class="form-field">
+                    <label for="request-phone">
+                        Phone number
+                    </label>
+
+                    <input
+                        id="request-phone"
+                        name="customerPhone"
+                        type="tel"
+                        maxlength="40"
+                        required
+                    >
+                </div>
+
+                <div class="form-field full-field">
+                    <label for="product-name">
+                        Required product name
+                    </label>
+
+                    <input
+                        id="product-name"
+                        name="productName"
+                        type="text"
+                        maxlength="200"
+                        placeholder="Example: Toyota door weather strip"
+                        required
+                    >
+                </div>
+
+                <div class="form-field">
+                    <label for="vehicle-make">
+                        Vehicle manufacturer
+                    </label>
+
+                    <input
+                        id="vehicle-make"
+                        name="vehicleMake"
+                        type="text"
+                        maxlength="100"
+                        placeholder="Toyota"
+                    >
+                </div>
+
+                <div class="form-field">
+                    <label for="vehicle-model">
+                        Vehicle model
+                    </label>
+
+                    <input
+                        id="vehicle-model"
+                        name="vehicleModel"
+                        type="text"
+                        maxlength="100"
+                        placeholder="Corolla"
+                    >
+                </div>
+
+                <div class="form-field full-field">
+                    <label for="vehicle-year">
+                        Vehicle year
+                    </label>
+
+                    <input
+                        id="vehicle-year"
+                        name="vehicleYear"
+                        type="text"
+                        maxlength="20"
+                        placeholder="2018"
+                    >
+                </div>
+
+                <div class="form-field">
+    <label for="quantity">
+        Product quantity
+    </label>
+
+    <input
+        id="quantity"
+        name="quantity"
+        type="number"
+        min="1"
+        value="1"
+        placeholder="Enter required quantity"
+        required
+    >
+</div>
+
+
+
+
+
+                <div class="form-field full-field">
+                    <label for="request-details">
+                        Part details
+                    </label>
+
+                    <textarea
+                        id="request-details"
+                        name="details"
+                        rows="6"
+                        maxlength="2000"
+                        placeholder="Describe location, size, part number, damage or any other information."
+                        required
+                    ></textarea>
+                </div>
+
+
+<div class="form-field full-field">
+    <label for="shipping-address">
+        Shipping address
+    </label>
+
+    <textarea
+        id="shipping-address"
+        name="shippingAddress"
+        rows="4"
+        maxlength="500"
+        placeholder="House number, street, city, postal code and country"
+        required
+    ></textarea>
+</div>
+
+
+                <div class="form-field full-field">
+                    <label for="product-image">
+                        Product picture (optional)
+                    </label>
+
+                    <input
+                        id="product-image"
+                        name="productImage"
+                        type="file"
+                        accept=".png,.jpg,.jpeg,.webp,image/png,image/jpeg,image/webp"
+                    >
+
+                    <small>
+                        PNG, JPG, JPEG or WEBP. Maximum 5 MB.
+                    </small>
+                </div>
+
+            </div>
+
+            <div
+                id="image-preview-container"
+                class="image-preview-container"
+                hidden
+            >
+                <img
+                    id="image-preview"
+                    alt="Selected product preview"
+                >
+            </div>
+
+            <p
+                id="special-order-message"
+                class="form-message"
+                role="alert"
+            ></p>
+
+            <button
+                id="special-order-button"
+                type="submit"
+                class="primary-button form-submit-button"
+            >
+                Submit Part Request
+            </button>
+        </form>
+
+    </main>
+
+    <script
+        src="{{ url_for('static', filename='js/special-order.js') }}"
+    ></script>
+</body>
+</html>

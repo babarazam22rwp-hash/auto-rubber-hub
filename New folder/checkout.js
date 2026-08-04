@@ -120,7 +120,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 </div>
             `;
 
-            totalElement.textContent = "PKR0.00";
+            totalElement.textContent = "$0.00";
             submitButton.disabled = true;
 
             return;
@@ -272,19 +272,6 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     function formatCurrency(value) {
-    const amount = Number(value);
-
-    if (!Number.isFinite(amount)) {
-        return "PKR 0.00";
-    }
-
-    return `PKR ${amount.toLocaleString("en-PK", {
-        minimumFractionDigits: 2,
-        maximumFractionDigits: 2
-    })}`;
-}
-     /*
-    function formatCurrency(value) {
         return new Intl.NumberFormat(
             "en-US",
             {
@@ -292,7 +279,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 currency: "USD"
             }
         ).format(value);
-    }  */
+    }
 
     function escapeHtml(value) {
         const element =

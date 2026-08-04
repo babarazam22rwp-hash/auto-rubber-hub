@@ -1,0 +1,980 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <meta
+        name="description"
+        content="AUTO Rubber Hub provides premium automotive rubber parts, seals, bushes, mounts, hoses and accessories."
+    >
+
+    <title>AUTO Rubber Hub | Premium Automotive Rubber Parts</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+        rel="stylesheet"
+    >
+<!--
+    <link rel="stylesheet" href="style.css">  -->
+<link
+    rel="stylesheet"
+    href="{{ url_for('static', filename='css/style.css') }}"
+>
+
+</head>
+
+<body>
+
+    <div class="page-background" aria-hidden="true">
+        <span class="background-orb background-orb-one"></span>
+        <span class="background-orb background-orb-two"></span>
+        <span class="background-grid"></span>
+    </div>
+  
+    <header class="site-header">
+        <nav class="navbar glass-panel container" aria-label="Main navigation">
+
+            <a href="#home" class="brand" aria-label="AUTO Rubber Hub home">
+
+                <!--
+                <img
+                    src="images/auto-rubber-hub-logo.png.png"
+                    alt="AUTO Rubber Hub logo"
+                    class="brand-logo"
+                > -->
+
+                <img
+    src="{{ url_for('static', filename='images/auto-rubber-hub-logo.png.png') }}"
+    alt="AUTO Rubber Hub logo"
+    class="brand-logo"
+>
+              
+            </a>
+
+            <input
+                type="checkbox"
+                id="menu-toggle"
+                class="menu-toggle"
+                aria-label="Open navigation menu"
+            >
+
+            <label for="menu-toggle" class="menu-button" aria-hidden="true">
+                <span></span>
+                <span></span>
+                <span></span>
+            </label>
+
+            <div class="navigation-links">
+
+                
+
+                <a href="#home" class="nav-link active">Home</a>
+                <a href="#categories" class="nav-link">Categories</a>
+                <a href="#products" class="nav-link">Products</a>
+                <a href="#about" class="nav-link">About</a>
+                <a href="#contact" class="nav-link">Contact</a>
+
+                <a
+    href="{{ url_for('special_order_page') }}"
+    class="secondary-button"
+>
+    Request a Part
+</a>
+            </div>
+
+            <div class="navbar-actions">
+
+                <a
+                    href="#products"
+                    class="icon-button"
+                    aria-label="Search products"
+                    title="Search products"
+                >
+                    <svg viewBox="0 0 24 24" aria-hidden="true">
+                        <path
+                            d="m21 21-4.35-4.35m2.35-5.65a8 8 0 1 1-16 0 8 8 0 0 1 16 0Z"
+                        />
+                    </svg>
+                </a>
+
+                <a
+                    href="#products"
+                    class="icon-button cart-button"
+                    aria-label="Shopping cart"
+                    title="Shopping cart"
+                >
+                    <svg viewBox="0 0 24 24" aria-hidden="true">
+                        <path
+                            d="M3 4h2l2.2 10.2a2 2 0 0 0 2 1.6h7.9a2 2 0 0 0 2-1.6L20.5 8H6.1"
+                        />
+                        <circle cx="10" cy="20" r="1"></circle>
+                        <circle cx="18" cy="20" r="1"></circle>
+                    </svg>
+
+                    <span class="cart-count">0</span>
+                </a>
+
+                <a href="#products" class="small-glass-button">
+                    Shop Parts
+                </a>
+
+            </div>
+        </nav>
+    </header>
+
+    <main>
+
+        <section class="hero-section" id="home">
+            <div class="container hero-grid">
+
+                <div class="hero-content">
+
+                    <div class="eyebrow glass-chip">
+                        <span class="status-dot"></span>
+                        Premium automotive rubber components
+                    </div>
+
+                    <h1>
+                        Built to Seal.
+                        <span>Designed to Last.</span>
+                    </h1>
+
+                    <p class="hero-description">
+                        Find reliable door rubbers, window seals, engine mounts,
+                        suspension bushes, hoses and other automotive rubber parts
+                        for a smoother and safer drive.
+                    </p>
+
+                    <div class="hero-actions">
+                        <a href="#products" class="primary-button">
+                            Shop Now
+
+                            <svg viewBox="0 0 24 24" aria-hidden="true">
+                                <path d="M5 12h14"></path>
+                                <path d="m13 6 6 6-6 6"></path>
+                            </svg>
+                        </a>
+
+                        <a href="#categories" class="secondary-button">
+                            Browse Categories
+                        </a>
+                    </div>
+
+                    <div class="hero-statistics">
+
+                        <div class="statistic-card">
+                            <strong>500+</strong>
+                            <span>Quality Parts</span>
+                        </div>
+
+                        <div class="statistic-card">
+                            <strong>40+</strong>
+                            <span>Vehicle Brands</span>
+                        </div>
+
+                        <div class="statistic-card">
+                            <strong>4.9</strong>
+                            <span>Customer Rating</span>
+                        </div>
+
+                    </div>
+                </div>
+
+                <div class="hero-visual">
+
+                    <div class="hero-glow"></div>
+
+                    <div class="car-display glass-panel">
+                        <div class="display-topbar">
+                            <span>AUTO Rubber Hub</span>
+
+                            <div class="display-dots">
+                                <span></span>
+                                <span></span>
+                                <span></span>
+                            </div>
+                        </div>
+
+                        <div class="car-stage">
+
+                            <div class="car-silhouette" aria-label="Stylized car illustration">
+                                <div class="car-roof"></div>
+                                <div class="car-body"></div>
+                                <div class="car-window car-window-left"></div>
+                                <div class="car-window car-window-right"></div>
+                                <div class="car-light car-light-left"></div>
+                                <div class="car-light car-light-right"></div>
+                                <div class="wheel wheel-left"></div>
+                                <div class="wheel wheel-right"></div>
+                            </div>
+
+                            <div class="platform-light"></div>
+                        </div>
+
+                        <div class="display-footer">
+
+                            <div>
+                                <span class="display-label">Featured category</span>
+                                <strong>Door & Window Seals</strong>
+                            </div>
+
+                            <a href="#categories" class="round-arrow-button" aria-label="View categories">
+                                <svg viewBox="0 0 24 24" aria-hidden="true">
+                                    <path d="M5 12h14"></path>
+                                    <path d="m13 6 6 6-6 6"></path>
+                                </svg>
+                            </a>
+
+                        </div>
+                    </div>
+
+                    <div class="floating-card floating-card-one glass-panel">
+                        <span class="floating-icon">
+                            <svg viewBox="0 0 24 24" aria-hidden="true">
+                                <path d="M12 3 4 7v5c0 5 3.4 8.7 8 10 4.6-1.3 8-5 8-10V7l-8-4Z"></path>
+                                <path d="m9 12 2 2 4-5"></path>
+                            </svg>
+                        </span>
+
+                        <div>
+                            <strong>Premium Quality</strong>
+                            <span>Tested components</span>
+                        </div>
+                    </div>
+
+                    <div class="floating-card floating-card-two glass-panel">
+                        <span class="floating-icon">
+                            <svg viewBox="0 0 24 24" aria-hidden="true">
+                                <path d="M3 7h11v9H3z"></path>
+                                <path d="M14 10h4l3 3v3h-7z"></path>
+                                <circle cx="7" cy="18" r="2"></circle>
+                                <circle cx="18" cy="18" r="2"></circle>
+                            </svg>
+                        </span>
+
+                        <div>
+                            <strong>Fast Delivery</strong>
+                            <span>Secure packaging</span>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="container brand-strip glass-panel">
+                <span>Parts for popular vehicle brands</span>
+
+                <div class="brand-list">
+                    <strong>Toyota</strong>
+                    <strong>Honda</strong>
+                    <strong>Suzuki</strong>
+                    <strong>KIA</strong>
+                    <strong>Hyundai</strong>
+                    <strong>Nissan</strong>
+                </div>
+            </div>
+        </section>
+ 
+<!-- Catagory Portion-->
+
+
+        <section class="section categories-section" id="categories">
+            <div class="container">
+
+                <div class="section-heading">
+                    <div>
+                        <span class="section-kicker">Explore our collection</span>
+                        <h2>Popular Categories</h2>
+                    </div>
+
+                    <a href="#products" class="text-link">
+                        View all products
+                        <span>→</span>
+                    </a>
+                </div>
+
+                <div class="category-grid">
+
+                    <article class="category-card glass-panel">
+                        <div class="category-number">01</div>
+
+                        <div class="category-icon">
+                            <svg viewBox="0 0 24 24" aria-hidden="true">
+                                <path d="M5 3h14v18H5z"></path>
+                                <path d="M8 6h8v12H8z"></path>
+                                <path d="M15 12h.01"></path>
+                            </svg>
+                        </div>
+
+                        <h3>Door Rubbers</h3>
+
+                        <p>
+                            Durable door seals that reduce noise, dust and water entry.
+                        </p>
+
+                        <a href="#products" class="category-link">
+                            Explore
+                            <span>↗</span>
+                        </a>
+                    </article>
+
+                    <article class="category-card glass-panel">
+                        <div class="category-number">02</div>
+
+                        <div class="category-icon">
+                            <svg viewBox="0 0 24 24" aria-hidden="true">
+                                <path d="M4 5h16v14H4z"></path>
+                                <path d="M7 8h10v8H7z"></path>
+                            </svg>
+                        </div>
+
+                        <h3>Window Seals</h3>
+
+                        <p>
+                            Weather-resistant window channels and glass run rubbers.
+                        </p>
+
+                        <a href="#products" class="category-link">
+                            Explore
+                            <span>↗</span>
+                        </a>
+                    </article>
+
+                    <article class="category-card glass-panel featured-category">
+                        <div class="category-number">03</div>
+
+                        <div class="category-icon">
+                            <svg viewBox="0 0 24 24" aria-hidden="true">
+                                <circle cx="12" cy="12" r="7"></circle>
+                                <circle cx="12" cy="12" r="2"></circle>
+                                <path d="M12 5v3"></path>
+                                <path d="M12 16v3"></path>
+                                <path d="M5 12h3"></path>
+                                <path d="M16 12h3"></path>
+                            </svg>
+                        </div>
+
+                        <h3>Suspension Bushes</h3>
+
+                        <p>
+                            High-strength bushes designed to reduce road vibration.
+                        </p>
+
+                        <a href="#products" class="category-link">
+                            Explore
+                            <span>↗</span>
+                        </a>
+                    </article>
+
+                    <article class="category-card glass-panel">
+                        <div class="category-number">04</div>
+
+                        <div class="category-icon">
+                            <svg viewBox="0 0 24 24" aria-hidden="true">
+                                <path d="M7 4h10v5H7z"></path>
+                                <path d="M5 9h14v10H5z"></path>
+                                <path d="M8 12h8"></path>
+                                <path d="M8 16h5"></path>
+                            </svg>
+                        </div>
+
+                        <h3>Engine Mounts</h3>
+
+                        <p>
+                            Stable mounting components for improved engine comfort.
+                        </p>
+
+                        <a href="#products" class="category-link">
+                            Explore
+                            <span>↗</span>
+                        </a>
+                    </article>
+
+                    <article class="category-card glass-panel">
+                        <div class="category-number">05</div>
+
+                        <div class="category-icon">
+                            <svg viewBox="0 0 24 24" aria-hidden="true">
+                                <path d="M6 4c4 0 4 6 8 6s4 6 4 10"></path>
+                                <path d="M4 4h4"></path>
+                                <path d="M16 20h4"></path>
+                            </svg>
+                        </div>
+
+                        <h3>Hoses & Belts</h3>
+
+                        <p>
+                            Flexible automotive hoses and reliable rubber belts.
+                        </p>
+
+                        <a href="#products" class="category-link">
+                            Explore
+                            <span>↗</span>
+                        </a>
+                    </article>
+
+                    <article class="category-card glass-panel">
+                        <div class="category-number">06</div>
+
+                        <div class="category-icon">
+                            <svg viewBox="0 0 24 24" aria-hidden="true">
+                                <path d="M7 4h10v5H7z"></path>
+                                <path d="M5 9h14v10H5z"></path>
+                                <path d="M8 12h8"></path>
+                                <path d="M8 16h5"></path>
+                            </svg>
+                        </div>
+
+                        <h3>Bumpers</h3>
+
+                        <p>
+                            Stable mounting components for improved engine comfort.
+                        </p>
+
+                        <a href="#products" class="category-link">
+                            Explore
+                            <span>↗</span>
+                        </a>
+
+                </div>
+            </div>
+        </section>
+
+        <!--Featured Product Section-->
+
+        <section class="section products-section" id="products">
+            <div class="container">
+
+                <div class="section-heading">
+                    <div>
+                        <span class="section-kicker">Carefully selected</span>
+                        <h2>Featured Products</h2>
+                    </div>
+
+                    <div class="product-filters" aria-label="Product filters">
+                        <a href="#products" class="filter-button">All</a>
+                        <a href="#products" class="filter-button">Seals</a>
+                        <a href="#products" class="filter-button">Bushes</a>
+                        <a href="#products" class="filter-button">Mounts</a>
+                    </div>
+                </div>
+
+                <div class="product-grid" id="product-grid">
+    <p class="products-loading">Loading products...</p>
+</div>
+
+
+                <!-- 
+
+
+
+                <div class="product-grid">
+
+                    <article class="product-card glass-panel">
+
+                        <div class="product-image-area">
+                            <span class="product-badge">Best Seller</span>
+
+                            <button
+                                class="favorite-button"
+                                type="button"
+                                aria-label="Add Toyota door rubber to favourites"
+                            >
+                                <svg viewBox="0 0 24 24" aria-hidden="true">
+                                    <path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.7l-1.1-1.1a5.5 5.5 0 0 0-7.8 7.8l1.1 1.1L12 21l7.8-7.5 1.1-1.1a5.5 5.5 0 0 0-.1-7.8Z"></path>
+                                </svg>
+                            </button>
+
+                            <div class="product-illustration seal-illustration">
+                                <span></span>
+                                <span></span>
+                                <span></span>
+                            </div>
+                        </div>
+
+                        <div class="product-content">
+                            <div class="product-meta">
+                                <span>Door Rubber</span>
+                                <span class="stock-label">In stock</span>
+                            </div>
+
+                            <h3>Toyota Corolla Door Seal</h3>
+
+                            <p>Compatible with selected 2014–2020 models.</p>
+
+                            <div class="product-bottom">
+                                <div class="product-price">
+                                    <strong>$24.99</strong>
+                                    <del>$29.99</del>
+                                </div>
+
+                                <a href="#" class="add-cart-button" aria-label="Add Toyota Corolla Door Seal to cart">
+                                    <svg viewBox="0 0 24 24" aria-hidden="true">
+                                        <path d="M12 5v14"></path>
+                                        <path d="M5 12h14"></path>
+                                    </svg>
+                                </a>
+                            </div>
+                        </div>
+                    </article>
+
+                    <article class="product-card glass-panel">
+
+                        <div class="product-image-area">
+                            <span class="product-badge neutral-badge">Premium</span>
+
+                            <button
+                                class="favorite-button"
+                                type="button"
+                                aria-label="Add Honda glass run channel to favourites"
+                            >
+                                <svg viewBox="0 0 24 24" aria-hidden="true">
+                                    <path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.7l-1.1-1.1a5.5 5.5 0 0 0-7.8 7.8l1.1 1.1L12 21l7.8-7.5 1.1-1.1a5.5 5.5 0 0 0-.1-7.8Z"></path>
+                                </svg>
+                            </button>
+
+                            <div class="product-illustration channel-illustration">
+                                <span></span>
+                                <span></span>
+                            </div>
+                        </div>
+
+                        <div class="product-content">
+                            <div class="product-meta">
+                                <span>Window Seal</span>
+                                <span class="stock-label">In stock</span>
+                            </div>
+
+                            <h3>Honda Glass Run Channel</h3>
+
+                            <p>Flexible weatherproof channel for smooth window movement.</p>
+
+                            <div class="product-bottom">
+                                <div class="product-price">
+                                    <strong>$19.99</strong>
+                                    <del>$23.99</del>
+                                </div>
+
+                                <a href="#" class="add-cart-button" aria-label="Add Honda Glass Run Channel to cart">
+                                    <svg viewBox="0 0 24 24" aria-hidden="true">
+                                        <path d="M12 5v14"></path>
+                                        <path d="M5 12h14"></path>
+                                    </svg>
+                                </a>
+                            </div>
+                        </div>
+                    </article>
+
+                    <article class="product-card glass-panel">
+
+                        <div class="product-image-area">
+                            <span class="product-badge">Popular</span>
+
+                            <button
+                                class="favorite-button"
+                                type="button"
+                                aria-label="Add suspension bush kit to favourites"
+                            >
+                                <svg viewBox="0 0 24 24" aria-hidden="true">
+                                    <path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.7l-1.1-1.1a5.5 5.5 0 0 0-7.8 7.8l1.1 1.1L12 21l7.8-7.5 1.1-1.1a5.5 5.5 0 0 0-.1-7.8Z"></path>
+                                </svg>
+                            </button>
+
+                            <div class="product-illustration bush-illustration">
+                                <span></span>
+                                <span></span>
+                                <span></span>
+                            </div>
+                        </div>
+
+                        <div class="product-content">
+                            <div class="product-meta">
+                                <span>Suspension</span>
+                                <span class="stock-label">In stock</span>
+                            </div>
+
+                            <h3>Control Arm Bush Kit</h3>
+
+                            <p>Heavy-duty rubber bushes for reduced vibration and noise.</p>
+
+                            <div class="product-bottom">
+                                <div class="product-price">
+                                    <strong>$34.99</strong>
+                                    <del>$39.99</del>
+                                </div>
+
+                                <a href="#" class="add-cart-button" aria-label="Add Control Arm Bush Kit to cart">
+                                    <svg viewBox="0 0 24 24" aria-hidden="true">
+                                        <path d="M12 5v14"></path>
+                                        <path d="M5 12h14"></path>
+                                    </svg>
+                                </a>
+                            </div>
+                        </div>
+                    </article>
+
+                    <article class="product-card glass-panel">
+
+                        <div class="product-image-area">
+                            <span class="product-badge neutral-badge">New</span>
+
+                            <button
+                                class="favorite-button"
+                                type="button"
+                                aria-label="Add engine mounting rubber to favourites"
+                            >
+                                <svg viewBox="0 0 24 24" aria-hidden="true">
+                                    <path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.7l-1.1-1.1a5.5 5.5 0 0 0-7.8 7.8l1.1 1.1L12 21l7.8-7.5 1.1-1.1a5.5 5.5 0 0 0-.1-7.8Z"></path>
+                                </svg>
+                            </button>
+
+                            <div class="product-illustration mount-illustration">
+                                <span></span>
+                                <span></span>
+                                <span></span>
+                            </div>
+                        </div>
+
+                        <div class="product-content">
+                            <div class="product-meta">
+                                <span>Engine Mount</span>
+                                <span class="stock-label">In stock</span>
+                            </div>
+
+                            <h3>Engine Mounting Rubber</h3>
+
+                            <p>Strong vibration control for better engine stability.</p>
+
+                            <div class="product-bottom">
+                                <div class="product-price">
+                                    <strong>$42.99</strong>
+                                    <del>$49.99</del>
+                                </div>
+
+                                <a href="#" class="add-cart-button" aria-label="Add Engine Mounting Rubber to cart">
+                                    <svg viewBox="0 0 24 24" aria-hidden="true">
+                                        <path d="M12 5v14"></path>
+                                        <path d="M5 12h14"></path>
+                                    </svg>
+                                </a>
+                            </div>
+                        </div>
+                    </article>
+
+
+                </div> -->
+
+                <div class="center-button">
+                    <a href="#" class="secondary-button">
+                        View All Products
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!--About Section-->
+
+        <section class="section about-section" id="about">
+            <div class="container about-grid">
+
+                <div class="about-visual glass-panel">
+                    <div class="about-rings">
+                        <span class="about-ring ring-one"></span>
+                        <span class="about-ring ring-two"></span>
+                        <span class="about-ring ring-three"></span>
+
+                        <div class="about-center">
+                            <span>AUTO</span>
+                            <strong>RUBBER</strong>
+                            <span>HUB</span>
+                        </div>
+                    </div>
+
+                    <div class="quality-label">
+                        <span>Quality checked</span>
+                        <strong>100%</strong>
+                    </div>
+                </div>
+
+                <div class="about-content">
+                    <span class="section-kicker">Why choose us</span>
+
+                    <h2>
+                        Reliable parts for every journey.
+                    </h2>
+
+                    <p>
+                        AUTO Rubber Hub focuses on automotive rubber components
+                        that improve comfort, protection and vehicle performance.
+                        We help customers find dependable parts with clear
+                        compatibility information.
+                    </p>
+
+                    <div class="benefit-list">
+
+                        <article class="benefit-item">
+                            <span class="benefit-icon">
+                                <svg viewBox="0 0 24 24" aria-hidden="true">
+                                    <path d="M12 3 4 7v5c0 5 3.4 8.7 8 10 4.6-1.3 8-5 8-10V7l-8-4Z"></path>
+                                    <path d="m9 12 2 2 4-5"></path>
+                                </svg>
+                            </span>
+
+                            <div>
+                                <h3>Quality Components</h3>
+                                <p>Products selected for durability, fit and performance.</p>
+                            </div>
+                        </article>
+
+                        <article class="benefit-item">
+                            <span class="benefit-icon">
+                                <svg viewBox="0 0 24 24" aria-hidden="true">
+                                    <path d="M3 7h11v9H3z"></path>
+                                    <path d="M14 10h4l3 3v3h-7z"></path>
+                                    <circle cx="7" cy="18" r="2"></circle>
+                                    <circle cx="18" cy="18" r="2"></circle>
+                                </svg>
+                            </span>
+
+                            <div>
+                                <h3>Fast Delivery</h3>
+                                <p>Securely packed orders and reliable shipping support.</p>
+                            </div>
+                        </article>
+
+                        <article class="benefit-item">
+                            <span class="benefit-icon">
+                                <svg viewBox="0 0 24 24" aria-hidden="true">
+                                    <path d="M4 5h16v14H4z"></path>
+                                    <path d="M7 9h10"></path>
+                                    <path d="M7 13h6"></path>
+                                </svg>
+                            </span>
+
+                            <div>
+                                <h3>Helpful Support</h3>
+                                <p>Guidance for product selection and vehicle compatibility.</p>
+                            </div>
+                        </article>
+
+                    </div>
+
+                    <a href="#contact" class="primary-button">
+                        Learn More
+                        <svg viewBox="0 0 24 24" aria-hidden="true">
+                            <path d="M5 12h14"></path>
+                            <path d="m13 6 6 6-6 6"></path>
+                        </svg>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <section class="section reviews-section">
+            <div class="container">
+
+                <div class="section-heading centered-heading">
+                    <div>
+                        <span class="section-kicker">Customer feedback</span>
+                        <h2>Trusted by Drivers</h2>
+                    </div>
+                </div>
+
+                <div class="review-grid">
+
+                    <article class="review-card glass-panel">
+                        <div class="review-stars">★★★★★</div>
+
+                        <p>
+                            “The door rubber fitted perfectly and reduced wind noise
+                            immediately. The packaging was also very professional.”
+                        </p>
+
+                        <div class="review-author">
+                            <span>AH</span>
+
+                            <div>
+                                <strong>Ahmed Hassan</strong>
+                                <small>Toyota Corolla owner</small>
+                            </div>
+                        </div>
+                    </article>
+
+                    <article class="review-card glass-panel featured-review">
+                        <div class="review-stars">★★★★★</div>
+
+                        <p>
+                            “The product quality was better than expected. AUTO Rubber
+                            Hub helped me identify the correct suspension bushes.”
+                        </p>
+
+                        <div class="review-author">
+                            <span>US</span>
+
+                            <div>
+                                <strong>Usman Shah</strong>
+                                <small>Honda Civic owner</small>
+                            </div>
+                        </div>
+                    </article>
+
+                    <article class="review-card glass-panel">
+                        <div class="review-stars">★★★★★</div>
+
+                        <p>
+                            “A clean ordering experience, quick delivery and very good
+                            support. I will order engine mounts from them again.”
+                        </p>
+
+                        <div class="review-author">
+                            <span>SA</span>
+
+                            <div>
+                                <strong>Saad Ali</strong>
+                                <small>Suzuki owner</small>
+                            </div>
+                        </div>
+                    </article>
+
+                </div>
+            </div>
+        </section>
+
+        <section class="section newsletter-section" id="contact">
+            <div class="container">
+
+                <div class="newsletter glass-panel">
+
+                    <div class="newsletter-content">
+                        <span class="section-kicker">Stay updated</span>
+
+                        <h2>Get new products and special offers.</h2>
+
+                        <p>
+                            Subscribe for product updates, compatibility guides and
+                            exclusive AUTO Rubber Hub offers.
+                        </p>
+                    </div>
+
+                    <form class="newsletter-form" action="#" method="post">
+                        <label for="email" class="visually-hidden">
+                            Email address
+                        </label>
+
+                        <input
+                            type="email"
+                            id="email"
+                            name="email"
+                            placeholder="Enter your email address"
+                            required
+                        >
+
+                        <button type="submit" class="primary-button">
+                            Subscribe
+                            <svg viewBox="0 0 24 24" aria-hidden="true">
+                                <path d="M5 12h14"></path>
+                                <path d="m13 6 6 6-6 6"></path>
+                            </svg>
+                        </button>
+                    </form>
+
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="site-footer">
+        <div class="container footer-grid">
+
+            <div class="footer-brand">
+
+
+                 <img
+    src="{{ url_for('static', filename='images/auto-rubber-hub-logo.png.png') }}"
+    alt="AUTO Rubber Hub logo"
+    class="brand-logo"
+>
+
+                <!--
+                <img
+                    src="images/auto-rubber-hub-logo.png.png"
+                    alt="AUTO Rubber Hub logo"
+                    class="footer-logo"
+                >-->
+
+                <p>
+                    Premium automotive rubber components for better comfort,
+                    protection and performance.
+                </p>
+
+                <div class="social-links">
+                    <a href="#" aria-label="Facebook">f</a>
+                    <a href="#" aria-label="Instagram">in</a>
+                    <a href="#" aria-label="X social platform">x</a>
+                </div>
+            </div>
+
+            <div class="footer-column">
+                <h3>Quick Links</h3>
+                <a href="#home">Home</a>
+                <a href="#products">Products</a>
+                <a href="#categories">Categories</a>
+                <a href="#about">About Us</a>
+            </div>
+
+            <div class="footer-column">
+                <h3>Categories</h3>
+                <a href="#products">Door Rubbers</a>
+                <a href="#products">Window Seals</a>
+                <a href="#products">Suspension Bushes</a>
+                <a href="#products">Engine Mounts</a>
+            </div>
+
+            <div class="footer-column">
+                <h3>Contact</h3>
+                <a href="mailto:info@autorubberhub.com">
+                    info@autorubberhub.com
+                </a>
+                <a href="tel:+10000000000">
+                    +92 300 5088800
+                </a>
+                <span>Store LOcation</span>
+                <span>9:00 AM–7:00 PM</span>
+                <span>Monday–Saturday</span>
+                <span>9:00 AM–7:00 PM</span>
+            </div>
+
+        </div>
+
+        <div class="container footer-bottom">
+            <p>
+                © 2026 AUTO Rubber Hub. All rights reserved.
+            </p>
+
+            <div>
+                <a href="#">Privacy Policy</a>
+                <a href="#">Terms & Conditions</a>
+            </div>
+        </div>
+    </footer>
+    <!--
+    <script src="script.js"></script>  -->
+
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+    
+    <!--
+    <script
+    src="{{ url_for('static', filename='products.js') }}"
+></script>-->
+
+</body>
+</html>
