@@ -357,10 +357,10 @@ class SpecialPartRequest(db.Model):
     )
 
     details = db.Column(
-        db.Text,
-        nullable=False,
-    )
-
+    db.Text,
+    nullable=True,
+    default="",
+)
     image_filename = db.Column(
         db.String(255),
         nullable=True,
@@ -1024,11 +1024,11 @@ def create_special_order():
             }
         ), 400
 
-    if quantity < 1 or quantity > 100:
+    if quantity < 1 or quantity > 1000:
         return jsonify(
             {
                 "success": False,
-                "message": "Quantity must be between 1 and 100.",
+                "message": "Quantity must be between 1 and 1000.",
             }
         ), 400
 
@@ -1048,16 +1048,7 @@ def create_special_order():
             }
         ), 400
 
-    if len(details) < 10:
-        return jsonify(
-            {
-                "success": False,
-                "message": (
-                    "Please provide more information "
-                    "about the required part."
-                ),
-            }
-        ), 400
+   
 
     saved_filename: str | None = None
 
@@ -1075,7 +1066,7 @@ def create_special_order():
             vehicle_make=vehicle_make or None,
             vehicle_model=vehicle_model or None,
             vehicle_year=vehicle_year or None,
-            details=details,
+            details=details or "",
             image_filename=saved_filename,
             status="received",
         )
