@@ -131,6 +131,14 @@ document.addEventListener("DOMContentLoaded", () => {
         bindProductButtons();
     }
 
+function formatCurrency(value) {
+    return new Intl.NumberFormat("en-PK", {
+        minimumFractionDigits: 2,
+        maximumFractionDigits: 2
+    }).format(value).replace(/^/, "PKR ");
+}
+
+
     function createProductCard(product, index) {
         const productId = Number(product.id);
         const price = Number(product.price || 0);
@@ -215,9 +223,9 @@ document.addEventListener("DOMContentLoaded", () => {
                             ${
                                 oldPrice !== null
                                     ? `
-                                        <del>
-                                            ${oldPrice.toFixed(2)}
-                                        </del>
+                                       <del>
+    ${formatCurrency(oldPrice)}
+</del>
                                     `
                                     : ""
                             }
